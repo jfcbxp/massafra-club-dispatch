@@ -1,28 +1,34 @@
 package com.massafra.club.dispatch.listeners;
 
 
+import com.massafra.club.dispatch.annotations.Listener;
 import com.massafra.club.dispatch.constants.RabbitMQ;
-import com.massafra.club.dispatch.record.FidemaxCustomerRecord;
+import com.massafra.club.dispatch.records.internal.FidemaxCustomerInternalRecord;
+import com.massafra.club.dispatch.services.FidemaxCustomerService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
-public class ClientDispatchListener {
+@Listener
+@RequiredArgsConstructor
+public class FidemaxCustomerDispatchListener {
+
+    private final FidemaxCustomerService service;
 
     @RabbitListener(queues = RabbitMQ.CREATE_CUSTOMER_QUEUE)
     public void processOrderListener(
             @Header(AmqpHeaders.RECEIVED_ROUTING_KEY)
             String routingKey,
             @Payload
-            FidemaxCustomerRecord payload) {
+            FidemaxCustomerInternalRecord payload) {
 
         log.info("ClientDispatchListener.processClientDispatcher - Start - routingKey: [{}], orderWrapper: [{}]", routingKey, payload);
 
+        service.sendCustomer(payload);
 
         log.info("ClientDispatchListener.processClientDispatcher - End - routingKey: [{}]", routingKey);
     }

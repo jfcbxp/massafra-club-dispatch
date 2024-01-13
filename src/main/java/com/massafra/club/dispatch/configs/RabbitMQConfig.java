@@ -1,4 +1,4 @@
-package com.massafra.club.dispatch.config;
+package com.massafra.club.dispatch.configs;
 
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
