@@ -25,9 +25,7 @@ spring:
         default:
           connectTimeout: 10000
           readTimeout: 25000
-        fidemax-client:
-          AuthToken:
-            - 4d44f4bc-ca87-40a5-bd51-3b4f73fe1795-770
 
 fidemax:
-  url: https://api.fidelimax.com.br/api
+  url: ${FIDEMAX_URL:https://api.fidelimax.com.br/api}
+  token: ${FIDEMAX_TOKEN:4d44f4bc-ca87-40a5-bd51-3b4f73fe1795-770}

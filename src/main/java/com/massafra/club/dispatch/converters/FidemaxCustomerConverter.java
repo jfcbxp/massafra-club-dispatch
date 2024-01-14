@@ -15,6 +15,7 @@ public class FidemaxCustomerConverter extends AbstractConverter<FidemaxCustomerI
 
         return new FidemaxCustomerRequestRecord(fidemaxCustomer.name(),
                 fidemaxCustomer.cgc(),
+                fidemaxCustomer.birthDate(),
                 fidemaxCustomer.phone(),
                 fidemaxCustomer.password(),
                 customerAddress);

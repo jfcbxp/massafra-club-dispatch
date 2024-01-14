@@ -13,8 +13,8 @@ public class IntegrationErrorDecoder implements ErrorDecoder {
     public Exception decode(String methodKey, Response response) {
         try {
 
-            log.error("IntegrationErrorDecoder.decode - method: {} response is null", methodKey);
-            return new IntegrationInternalException("",
+            log.error("IntegrationErrorDecoder.decode - method: {}", methodKey);
+            return new IntegrationInternalException(response.reason(),
                     HttpStatus.INTERNAL_SERVER_ERROR.value());
 
 
