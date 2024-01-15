@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 public record FidemaxCustomerRequestRecord(@JsonProperty("nome") String name,
                                            @JsonProperty("cpf") String cgc,
+                                           @JsonProperty("email") String email,
                                            @JsonFormat(pattern = "dd/MM/yyyy")
                                            @JsonSerialize(using = LocalDateSerializer.class)
                                            @JsonDeserialize(using = LocalDateDeserializer.class)

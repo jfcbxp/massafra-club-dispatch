@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public record FidemaxCustomerInternalRecord(String name,
                                             String cgc,
+                                            String email,
                                             LocalDate birthDate,
                                             String phone,
                                             String password,
