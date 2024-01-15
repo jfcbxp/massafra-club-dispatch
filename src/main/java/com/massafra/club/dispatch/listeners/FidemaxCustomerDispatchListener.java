@@ -20,16 +20,16 @@ public class FidemaxCustomerDispatchListener {
     private final FidemaxCustomerService service;
 
     @RabbitListener(queues = RabbitMQ.CREATE_CUSTOMER_QUEUE)
-    public void processOrderListener(
+    public void processDispatchCustomerListener(
             @Header(AmqpHeaders.RECEIVED_ROUTING_KEY)
             String routingKey,
             @Payload
             FidemaxCustomerInternalRecord payload) {
 
-        log.info("ClientDispatchListener.processClientDispatcher - Start - routingKey: [{}], orderWrapper: [{}]", routingKey, payload);
+        log.info("FidemaxCustomerDispatchListener.processDispatchCustomerListener - Start - routingKey: [{}], orderWrapper: [{}]", routingKey, payload);
 
         service.sendCustomer(payload);
 
-        log.info("ClientDispatchListener.processClientDispatcher - End - routingKey: [{}]", routingKey);
+        log.info("FidemaxCustomerDispatchListener.processDispatchCustomerListener - End - routingKey: [{}]", routingKey);
     }
 }
