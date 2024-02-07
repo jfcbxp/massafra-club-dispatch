@@ -12,4 +12,8 @@ public class RabbitMQ {
     //CUSTOMER DISPATCHED
     public static final String DISPATCHED_CUSTOMER_ROUTING_KEY = "dispatched.customer";
     public static final String DISPATCHED_CUSTOMER_QUEUE = CLUB_QUEUE_PREFIX + DISPATCHED_CUSTOMER_ROUTING_KEY;
+
+    //ORDER
+    public static final String CREATE_ORDER_ROUTING_KEY = "create.order";
+    public static final String CREATE_ORDER_QUEUE = CLUB_QUEUE_PREFIX + CREATE_ORDER_ROUTING_KEY;
 }

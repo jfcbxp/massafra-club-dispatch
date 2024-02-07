@@ -2,6 +2,7 @@ package com.massafra.club.dispatch.clients;
 
 import com.massafra.club.dispatch.configs.FidemaxFeignConfig;
 import com.massafra.club.dispatch.records.request.FidemaxCustomerRequestRecord;
+import com.massafra.club.dispatch.records.request.FidemaxLoyaltyRequestRecord;
 import com.massafra.club.dispatch.records.response.FidemaxCustomerResponseRecord;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -22,8 +23,17 @@ public interface FidemaxClient {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    FidemaxCustomerResponseRecord createClient(
+    FidemaxCustomerResponseRecord sendCustomer(
             @RequestBody
             FidemaxCustomerRequestRecord body);
+
+    @PostMapping(
+            value = "/PontuaConsumidor",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    FidemaxCustomerResponseRecord sendLoyalty(
+            @RequestBody
+            FidemaxLoyaltyRequestRecord body);
 
 }

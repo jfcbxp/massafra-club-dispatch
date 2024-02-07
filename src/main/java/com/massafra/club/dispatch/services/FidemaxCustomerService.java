@@ -26,7 +26,7 @@ public class FidemaxCustomerService {
     public void sendCustomer(FidemaxCustomerInternalRecord customerRecord) {
         try {
             var requestBody = mapper.map(customerRecord, FidemaxCustomerRequestRecord.class);
-            var response = client.createClient(requestBody);
+            var response = client.sendCustomer(requestBody);
 
             if (response.statusCode() != 100 && response.statusCode() != 110)
                 throw new IntegrationInternalException(response.message(), response.statusCode());
