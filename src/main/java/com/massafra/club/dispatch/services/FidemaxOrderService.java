@@ -23,7 +23,7 @@ public class FidemaxOrderService {
             var requestBody = mapper.map(loyalty, FidemaxLoyaltyRequestRecord.class);
             var response = client.sendLoyalty(requestBody);
 
-            if (response.statusCode() != 200)
+            if (response.statusCode() != 100 && response.statusCode() != 108)
                 throw new IntegrationInternalException(response.message(), response.statusCode());
 
         } catch (IntegrationInternalException e) {
