@@ -29,3 +29,7 @@ spring:
 fidemax:
   url: ${FIDEMAX_URL:https://api.fidelimax.com.br/api}
   token: ${FIDEMAX_TOKEN:4d44f4bc-ca87-40a5-bd51-3b4f73fe1795-770}
+
+protheus:
+  loggerLevel: BASIC
+  url: ${PROTHEUS_URL:http://192.168.2.54:9095}
