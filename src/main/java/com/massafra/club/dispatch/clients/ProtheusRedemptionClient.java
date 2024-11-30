@@ -1,7 +1,7 @@
 package com.massafra.club.dispatch.clients;
 
 import com.massafra.club.dispatch.configs.FidemaxFeignConfig;
-import com.massafra.club.dispatch.records.request.FidemaxCustomerRedemptionRequestRecord;
+import com.massafra.club.dispatch.records.request.ProtheusCustomerRedemptionRequestRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -26,9 +26,9 @@ public interface ProtheusRedemptionClient {
     )
     void sendRedemption(
             @RequestBody()
-            FidemaxCustomerRedemptionRequestRecord data);
+            ProtheusCustomerRedemptionRequestRecord request);
 
-    default void serviceFallbackMethod(FidemaxCustomerRedemptionRequestRecord request, boolean ignoreInvalid, Throwable exception) {
+    default void serviceFallbackMethod(ProtheusCustomerRedemptionRequestRecord request, boolean ignoreInvalid, Throwable exception) {
         log.error("ProtheusRedemptionClient.serviceFallbackMethod - error request availability {}", exception.getMessage());
     }
 }

@@ -3,6 +3,7 @@ package com.massafra.club.dispatch.services;
 import com.massafra.club.dispatch.clients.ProtheusRedemptionClient;
 import com.massafra.club.dispatch.exceptions.IntegrationInternalException;
 import com.massafra.club.dispatch.records.request.FidemaxCustomerRedemptionRequestRecord;
+import com.massafra.club.dispatch.records.request.ProtheusCustomerRedemptionRequestRecord;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,16 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class FidemaxRedemptionService {
 
+    private static final String PROTHEUS_REDEMPTION_DEFAULT_METHOD = "/incluirResgateFidemax";
+
     private final ProtheusRedemptionClient client;
 
     public void createRedemption(FidemaxCustomerRedemptionRequestRecord redemption) {
         try {
 
-            client.sendRedemption(redemption);
+            var request = new ProtheusCustomerRedemptionRequestRecord(PROTHEUS_REDEMPTION_DEFAULT_METHOD, redemption);
+            
+            client.sendRedemption(request);
 
             log.info("FidemaxRedemptionService.createRedemption - redemption {} ",
                     redemption.voucher());
