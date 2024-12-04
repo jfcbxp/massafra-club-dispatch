@@ -5,10 +5,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigInteger;
 
 public record FidemaxCustomerRedemptionRequestRecord(@JsonProperty("nome") String name,
-                                                     @JsonProperty("cpf") String cpf,
+                                                     @JsonProperty("email") String email,
+                                                     @JsonProperty("sexo") String gender,
+                                                     @JsonProperty("nascimento") String birthday,
+                                                     @JsonProperty("telefone") String phone,
+                                                     @JsonProperty("cpf") String customerId,
                                                      @JsonProperty("saldo") BigInteger pointsAmount,
-                                                     @JsonProperty("premio") String reward,
+                                                     @JsonProperty("premio") String rewardDescription,
                                                      @JsonProperty("voucher") String voucher,
-                                                     @JsonProperty("quantidade_premios") BigInteger rewardsAmount,
-                                                     @JsonProperty("reais_cashback") String cashAmount) {
+                                                     @JsonProperty("quantidade_premios") BigInteger amountRewards,
+                                                     @JsonProperty("reais_cashback") String cashback) {
 }

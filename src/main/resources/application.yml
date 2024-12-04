@@ -1,7 +1,12 @@
 spring:
   application:
     name: club-dispatch
-
+  data:
+    mongodb:
+      uri: mongodb://${MONGODB_HOST:localhost}:${MONGODB_PORT:27017}/${MONGODB_DATABASE:CLUB_DISPATCH}
+      host: ${MONGODB_HOST}
+      database: ${MONGODB_DATABASE:CLUB_DISPATCH}
+      auto-index-creation: true
   rabbitmq:
     host: ${RABBIT_HOST:localhost}
     port: ${RABBIT_PORT:5672}
@@ -33,3 +38,13 @@ fidemax:
 protheus:
   loggerLevel: BASIC
   url: ${PROTHEUS_URL:http://192.168.2.54:9095}
+
+
+fidemax-redemption:
+  max-retires: 10
+  pulse-interval: 5
+  scheduler:
+    cron-value: ${FIDEMAX_REDEMPTION_CRON_VALUE:0 */30 6-8 * * *}
+    least-lock-time: PT30s
+    most-lock-time: PT1M
+    limit-rows: 200

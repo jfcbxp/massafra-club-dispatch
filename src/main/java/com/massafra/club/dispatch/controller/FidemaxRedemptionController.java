@@ -31,11 +31,11 @@ public class FidemaxRedemptionController {
             @Valid
             FidemaxCustomerRedemptionRequestRecord request) {
 
-        service.createRedemption(request);
+        var id = service.registerRedemption(request);
 
         return ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(request.voucher()).toUri();
+                .buildAndExpand(id).toUri();
     }
 }

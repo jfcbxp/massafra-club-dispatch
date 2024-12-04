@@ -1,0 +1,62 @@
+version: "3.9"
+
+
+x-service_defaults: &service_defaults
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+  labels:
+    org.springframework.boot.ignore: true
+
+services:
+
+  rabbitmq:
+    <<: *service_defaults
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - club-dispatch-compose-network
+
+  mongodb:
+    <<: *service_defaults
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    networks:
+      - club-dispatch-compose-network
+
+  mongoexpress:
+    <<: *service_defaults
+    image: mongo-express:latest
+    ports:
+      - '8081:8081'
+    environment:
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    networks:
+      - club-dispatch-compose-network
+
+  redis:
+    <<: *service_defaults
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6379:6379'
+    networks:
+      - club-dispatch-compose-network
+
+  prometheus:
+    <<: *service_defaults
+    image: prom/prometheus
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+    networks:
+      - club-dispatch-compose-network
+
+networks:
+  club-dispatch-compose-network:
+    driver: bridge
