@@ -1,0 +1,20 @@
+version: "3"
+services:
+  tomcat:
+    container_name: "tomcatjsf"
+    image: tomcat:8.5.88-jre8
+    restart: always
+    ports:
+      - '9090:8080'
+    networks:
+      - docker_tomcat_network
+    volumes:
+      - /home/garcia/webapps:/usr/local/tomcat/webapps
+      - /home/garcia/logs:/usr/local/tomcat/logs
+    environment:
+      - JVM_OPTS=-Xmx4096m -Xms1024m -XX:MaxPermSize=1024m
+      - CATALINA_OPTS=-Xmx4096m -Xms1024m -XX:MaxPermSize=1024m
+      - "JAVA_OPTS=-Xmx4096m -Xms1024m -XX:MaxPermSize=1024m"
+networks:
+  docker_tomcat_network:
+    driver: bridge

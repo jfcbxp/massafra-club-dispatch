@@ -1,0 +1,20 @@
+version: "3"
+services:
+  rabbitmq:
+    container_name: "rabbitmq"
+    image: rabbitmq:management
+    restart: always
+    ports:
+      # AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI
+      - '15672:15672'
+    networks:
+      - docker_rabbit_network
+    volumes:
+      - /home/rabbitmq/db:/var/lib/rabbitmq
+      - /home/rabbitmq/data:/var/lib/rabbitmq/mnesia/
+networks:
+  docker_rabbit_network:
+    name: docker_rabbit_network
+    driver: bridge

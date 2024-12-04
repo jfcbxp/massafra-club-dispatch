@@ -1,0 +1,49 @@
+version: "3"
+services:
+  clubintegrator:
+    image: jfcbxp/club-massafra-integrator:latest
+    command: --spring.profiles.active=prod
+    restart: always
+    networks:
+      - docker_rabbit_network
+    environment:
+      - RABBIT_HOST=rabbitmq
+      - RABBIT_PORT=5672
+      - RABBIT_USERNAME=guest
+      - RABBIT_PASSWORD=guest
+      - MSSQLDB_HOST=x
+      - MSSQLDB_PORT=1433
+      - MSSQLDB_DBNAME=TOTVS
+      - MSSQLDB_USERNAME=sa
+      - MSSQLDB_PASSWORD=
+      - SPRING_PROFILES_ACTIVE=prod
+  clubdispatch:
+    image: jfcbxp/club-massafra-dispatch:latest
+    command: --spring.profiles.active=prod
+    restart: always
+    networks:
+      - docker_rabbit_network
+      - docker_mongodb_network
+    ports:
+      - 9092:8080
+    environment:
+      - RABBIT_HOST=rabbitmq
+      - RABBIT_PORT=5672
+      - RABBIT_USERNAME=guest
+      - RABBIT_PASSWORD=guest
+      - FIDEMAX_URL=https://api.fidelimax.com.br/api
+      - FIDEMAX_TOKEN=x
+      - SPRING_PROFILES_ACTIVE=prod
+      - MONGODB_HOST=mongodb
+    depends_on:
+      - clubintegrator
+
+volumes:
+  docker_club_massafra: {}
+networks:
+  docker_rabbit_network:
+    external:
+      name: docker_rabbit_network
+  docker_mongodb_network:
+    external:
+      name: docker_mongodb_network

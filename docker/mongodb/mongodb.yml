@@ -1,0 +1,25 @@
+version: "3"
+services:
+  mongodb:
+    container_name: "mongodb"
+    image: mongo
+    restart: always
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    networks:
+      - docker_mongodb_network
+  mongoexpress:
+    image: mongo-express:latest
+    ports:
+      - '8081:8081'
+    environment:
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    networks:
+      - docker_mongodb_network
+networks:
+  docker_mongodb_network:
+    name: docker_mongodb_network
+    driver: bridge
