@@ -2,13 +2,17 @@ package com.massafra.club.dispatch.records.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 public record FidemaxCustomerRedemptionRequestRecord(@JsonProperty("nome") String name,
-                                                     @JsonProperty("cpf") String cpf,
-                                                     @JsonProperty("saldo") BigInteger pointsAmount,
-                                                     @JsonProperty("premio") String reward,
+                                                     @JsonProperty("email") String email,
+                                                     @JsonProperty("sexo") String gender,
+                                                     @JsonProperty("nascimento") String birthday,
+                                                     @JsonProperty("telefone") String phone,
+                                                     @JsonProperty("cpf") String customerId,
+                                                     @JsonProperty("saldo") BigDecimal pointsAmount,
+                                                     @JsonProperty("premio") String rewardDescription,
                                                      @JsonProperty("voucher") String voucher,
-                                                     @JsonProperty("quantidade_premios") BigInteger rewardsAmount,
-                                                     @JsonProperty("reais_cashback") String cashAmount) {
+                                                     @JsonProperty("quantidade_premios") BigDecimal amountRewards,
+                                                     @JsonProperty("reais_cashback") BigDecimal cashback) {
 }
